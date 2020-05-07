@@ -3,7 +3,7 @@ import Layout from '../../components/layout'
 import Date from '../../components/date'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import utilStyles from '../../styles/utils.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 export const getStaticPaths = async () => {
   const paths = getAllPostIds()
@@ -23,22 +23,21 @@ export const getStaticProps = async ({ params }) => {
 }
 
 const Post = ({ postData }) => {
+  const ref = useRef()
   const [isInView, setIsInView] = useState(false)
 
   useEffect(() => {
-    const intersectionObserver = new IntersectionObserver(handleIntersectionObserver, {
-      threshold: [0, 1.0]
+    const observer = new IntersectionObserver(([entry], _) => {
+      if(ref.current && entry.isIntersecting){
+        setIsInView(true)
+        observer.unobserve(ref.current)
+      }
+      console.log('hoge')
     })
-    intersectionObserver.observe(document.getElementById('article'))
-  }, [])
-
-  const handleIntersectionObserver = (entries, _) => {
-    entries.forEach((entry) => {
-      setIsInView(true)
-      console.log(entry)
-      console.log('読了')
-    })
-  }
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+  }, [ref])
 
   return (
     <Layout>
@@ -52,6 +51,7 @@ const Post = ({ postData }) => {
           <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
         </div>
       </article>
+      <div ref={ref} />
     </Layout>
   )
 }
