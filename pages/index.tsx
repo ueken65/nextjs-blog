@@ -37,19 +37,18 @@ const Home = ({ allPostsData }: { allPostsData: Post[] }) => {
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.List}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
+        {allPostsData.map(({ id, date, title }) => (
+          <div className={utilStyles.listItem} key={id}>
+            <h3 className={utilStyles.listItemTitle}>
               <Link href="/posts/[id]" as={`/posts/${id}`}>
                 <a>{title}</a>
               </Link>
-              <br />
-              <small className={utilStyles.lightText}>
-                <Date dateString={date} />
-              </small>
-            </li>
-          ))}
-        </ul>
+            </h3>
+            <small className={utilStyles.lightText}>
+              <Date dateString={date} />
+            </small>
+          </div>
+        ))}
       </section>
     </Layout>
   );

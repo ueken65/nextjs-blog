@@ -1,9 +1,10 @@
 import React from "react";
-import { parseISO, format } from "date-fns";
+import dayjs from "dayjs";
 
 const Date = ({ dateString }: { dateString: string }) => {
-  const date = parseISO(dateString);
-  return <time dateTime={dateString}>{format(date, "LLLL d, yyyy")}</time>;
+  return (
+    <time dateTime={dateString}>{dayjs(dateString).format("YYYY-MM-DD")}</time>
+  );
 };
 
 export default Date;

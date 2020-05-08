@@ -22,8 +22,8 @@ const Post = ({ postData }: { postData: PostType }) => {
       </Head>
       <article>
         <h1 className={utilStyles.headingXl}>{postData.title}</h1>
-        <div className={utilStyles.lightText}>
-          <Date dateString={postData.date} />
+        <Date dateString={postData.date} />
+        <div className={utilStyles.markdownBody}>
           <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
         </div>
       </article>

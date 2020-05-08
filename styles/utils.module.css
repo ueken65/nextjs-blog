@@ -47,6 +47,15 @@
   margin: 0 0 1.25rem;
 }
 
+.listItemTitle {
+  font-size: 1.17rem;
+  margin: 0;
+}
+
 .lightText {
   color: #999;
+}
+
+.markdownBody {
+  color: #333;
 }
