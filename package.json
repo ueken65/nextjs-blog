@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "ts-node -T -O '{\"module\":\"commonjs\"}' ./test/lib/postsTest.ts"
   },
   "dependencies": {
     "date-fns": "2.12.0",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@types/node": "13.13.4",
     "@types/react": "16.9.34",
+    "ts-node": "8.10.1",
     "typescript": "3.8.3"
   }
 }

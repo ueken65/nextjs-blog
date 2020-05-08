@@ -2,22 +2,23 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
-import { getSortedPostsData } from '../lib/posts'
+import PostUtil from '../lib/posts'
 import Date from '../components/date'
-
-export const getStaticProps = async () =>{
-  const allPostsData = getSortedPostsData()
-  return {
-    props: {
-      allPostsData
-    }
-  }
-}
 
 interface Post {
   id: string;
   date: string;
   title: string;
+}
+
+export const getStaticProps = async () =>{
+  const postUtil = new PostUtil
+  const allPostsData = postUtil.getSortedPostsData()
+  return {
+    props: {
+      allPostsData
+    }
+  }
 }
 
 const Home = ({
