@@ -2,4 +2,5 @@
 
 ## TODO
 - [x] test
-- [ ] lint
+- [x] lint
+- [ ] styled component

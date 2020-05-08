@@ -1,17 +1,18 @@
-import Head from 'next/head'
-import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
-import Link from 'next/link'
+import React from "react";
+import Head from "next/head";
+import styles from "./layout.module.css";
+import utilStyles from "../styles/utils.module.css";
+import Link from "next/link";
 
-const name = 'Your Name'
-export const siteTitle = 'Next.js Sample Website'
+const name = "Your Name";
+export const siteTitle = "Next.js Sample Website";
 
 const Layout = ({
   children,
-  home
+  home,
 }: {
-  children: React.ReactNode,
-  home?: boolean
+  children: React.ReactNode;
+  home?: boolean;
 }) => {
   return (
     <div className={styles.container}>
@@ -68,7 +69,7 @@ const Layout = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

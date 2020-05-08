@@ -1,7 +1,8 @@
-import { NextPage } from 'next';
+import React from "react";
+import { NextPage } from "next";
 
 const Index: NextPage = () => {
-    return <p>hogehoge</p>
-}
+  return <p>hogehoge</p>;
+};
 
-export default Index
+export default Index;

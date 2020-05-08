@@ -1,9 +1,10 @@
-import Head from 'next/head'
-import Layout from '../../components/layout'
-import Date from '../../components/date'
-import PostUtil from '../../lib/postUtil'
-import utilStyles from '../../styles/utils.module.css'
-import { GetStaticProps, GetStaticPaths } from 'next'
+import React from "react";
+import Head from "next/head";
+import Layout from "../../components/layout";
+import Date from "../../components/date";
+import PostUtil from "../../lib/postUtil";
+import utilStyles from "../../styles/utils.module.css";
+import { GetStaticProps, GetStaticPaths } from "next";
 
 interface PostType {
   title: string;
@@ -11,7 +12,7 @@ interface PostType {
   contentHtml: string;
 }
 
-const postUtil = new PostUtil
+const postUtil = new PostUtil();
 
 const Post = ({ postData }: { postData: PostType }) => {
   return (
@@ -27,24 +28,24 @@ const Post = ({ postData }: { postData: PostType }) => {
         </div>
       </article>
     </Layout>
-  )
-}
+  );
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = postUtil.getAllPostIds()
+  const paths = postUtil.getAllPostIds();
   return {
     paths,
-    fallback: false
-  }
-}
+    fallback: false,
+  };
+};
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postData = await postUtil.getPostData(params?.id as string)
+  const postData = await postUtil.getPostData(params?.id as string);
   return {
     props: {
-      postData
-    }
-  }
-}
+      postData,
+    },
+  };
+};
 
-export default Post
+export default Post;
