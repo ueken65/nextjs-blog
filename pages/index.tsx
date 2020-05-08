@@ -14,7 +14,17 @@ export const getStaticProps = async () =>{
   }
 }
 
-const Home = ({ allPostsData }) => {
+interface Post {
+  id: string;
+  date: string;
+  title: string;
+}
+
+const Home = ({
+  allPostsData
+}: {
+  allPostsData: Post[]
+}) => {
   return (
     <Layout home>
       <Head>
