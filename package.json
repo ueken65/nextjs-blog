@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "ci": "yarn --frozen-lockfile",
     "test": "ts-node -T -O '{\"module\":\"commonjs\"}' ./test/lib/postsTest.ts"
   },
   "dependencies": {

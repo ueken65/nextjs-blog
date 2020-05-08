@@ -41,16 +41,21 @@ function withGetAllPostIds() {
 }
 
 async function withGetPostData() {
-  const postData = await postUtil.getPostData('post-latest')
-  assert.deepEqual(
-    postData,
-    {
-      id: 'post-latest',
-      contentHtml: '<p>hogepiyo</p>\n',
-      title: 'piyopiyo',
-      date: '2020-11-21'
-    }
-  )
+  try {
+    const postData = await postUtil.getPostData('post-latest')
+    assert.deepEqual(
+      postData,
+      {
+        id: 'post-latest',
+        contentHtml: '<p>hogepiyo</p>\n',
+        title: 'piyopiyo',
+        date: '2020-11-21'
+      }
+    )
+  } catch (e) {
+    console.error(e)
+    process.exit(1)
+  }
 }
 
 [
