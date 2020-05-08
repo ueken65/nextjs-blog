@@ -1,6 +1,6 @@
 import assert from 'assert'
 import path from 'path'
-import PostUtil from '../../lib/posts'
+import PostUtil from '../../lib/postUtil'
 
 const postUtil = new PostUtil(path.join(process.cwd(), 'test/lib/Fixtures'))
 

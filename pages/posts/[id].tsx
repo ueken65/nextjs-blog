@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Layout from '../../components/layout'
 import Date from '../../components/date'
-import PostUtil from '../../lib/posts'
+import PostUtil from '../../lib/postUtil'
 import utilStyles from '../../styles/utils.module.css'
 import { GetStaticProps, GetStaticPaths } from 'next'
 
