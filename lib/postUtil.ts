@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import remark from "remark";
 import html from "remark-html";
+import highlight from "remark-highlight.js";
 
 export default class PostUtil {
   postsDirectory: any;
@@ -53,6 +54,7 @@ export default class PostUtil {
     const matterResult = matter(fileContents);
 
     const processedContent = await remark()
+      .use(highlight)
       .use(html)
       .process(matterResult.content);
     const contentHtml = processedContent.toString();

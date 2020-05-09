@@ -39,7 +39,9 @@ async function withGetPostData() {
     const postData = await postUtil.getPostData("post-latest");
     assert.deepEqual(postData, {
       id: "post-latest",
-      contentHtml: "<p>hogepiyo</p>\n",
+      contentHtml:
+        "<p>hogepiyo</p>\n" +
+        '<pre><code class="hljs language-javascript"><span class="hljs-keyword">const</span> hogepiyo = <span class="hljs-number">1</span>;</code></pre>\n',
       title: "piyopiyo",
       date: "2020-11-21",
     });

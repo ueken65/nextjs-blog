@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Head from "next/head";
 import Layout from "../../components/layout";
 import Date from "../../components/date";
@@ -15,6 +15,8 @@ interface PostType {
 const postUtil = new PostUtil();
 
 const Post = ({ postData }: { postData: PostType }) => {
+  const contentRef = useRef(null);
+
   return (
     <Layout>
       <Head>
@@ -24,7 +26,10 @@ const Post = ({ postData }: { postData: PostType }) => {
         <h1 className={utilStyles.headingXl}>{postData.title}</h1>
         <Date dateString={postData.date} />
         <div className={utilStyles.markdownBody}>
-          <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+          <div
+            ref={contentRef}
+            dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+          />
         </div>
       </article>
     </Layout>
