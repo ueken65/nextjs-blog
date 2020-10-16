@@ -1,0 +1,22 @@
+name: create_reset_develop_pr
+
+on:
+  schedule:
+    - cron: 50 * * * *
+
+jobs:
+  create_pr:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout master branch
+      uses: actions/checkout@v1
+      with:
+        ref: master
+    - name: install hub
+      uses: geertvdc/setup-hub@v1.0.0
+    - name: create PR
+      env:
+        GITHUB_USER: ${{ secrets.CREATE_RESET_DEVELOP_PR_USER }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        hub pull-request -b develop -m "[Scheduled]master to develop"
