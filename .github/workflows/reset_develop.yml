@@ -2,21 +2,34 @@ name: create_reset_develop_pr
 
 on:
   schedule:
-    - cron: 50 * * * *
+    - cron: '*/5 * * * *'
 
 jobs:
   create_pr:
     runs-on: ubuntu-latest
     steps:
-    - name: checkout master branch
-      uses: actions/checkout@v1
+    - name: checkout develop branch
+      uses: actions/checkout@v2
       with:
-        ref: master
-    - name: install hub
-      uses: geertvdc/setup-hub@v1.0.0
-    - name: create PR
-      env:
-        GITHUB_USER: ${{ secrets.CREATE_RESET_DEVELOP_PR_USER }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ref: develop
+    - name: Reset develop branch
       run: |
-        hub pull-request -b develop -m "[Scheduled]master to develop"
+        git fetch origin master:master
+        git reset --hard master
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      with:
+          commit-message: |
+            chore: master to develop
+          title: |
+            🤖 master to develop
+          body: |
+            [定期] develop を master と合わせる
+            手順は以下
+            - [ ] ステージングで動作確認中のコードがないか確認
+              - あるなら検証を完了させて master に反映させるか、このPRをマージ後に再度コードをステージングにあげる
+            - [ ] ステージングだけに走ってる migration がないか確認
+              - あるなら master に反映させるか、一度ロールバックしてこのPRをマージ後に再度 apply する 
+            - [ ] 問題なさそうならマージ
+            - [ ] branch を削除
+          branch: reset-develop
