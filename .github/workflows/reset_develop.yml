@@ -1,28 +1,38 @@
 name: create_reset_develop_pr
 
-on:
-  schedule:
-    - cron: '*/5 * * * *'
+on:  
+  push:
+    branches:    
+      - master
 
 jobs:
   create_pr:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Create Pull Request
-      uses: repo-sync/pull-request@v2
+    - name: checkout develop branch
+      uses: actions/checkout@v2
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        destination_branch: develop
-        source_branch: master
-        pr_title: |
-          🤖 master to develop
-        pr_body: |
-          [定期] develop を master と合わせる
+        fetch-depth: 0
+    - name: Reset develop branch
+      run: |
+        git checkout develop
+        git rm -rf *
+        git checkout master -- .
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      with:
+          commit-message: |
+            chore: reset develop to master
+          title: |
+            🤖 reset develop to master
+          body: |
+            [定期] develop を master と合わせる
             手順は以下
             - [ ] ステージングで動作確認中のコードがないか確認
               - あるなら検証を完了させて master に反映させるか、このPRをマージ後に再度コードをステージングにあげる
             - [ ] ステージングだけに走ってる migration がないか確認
               - あるなら master に反映させるか、一度ロールバックしてこのPRをマージ後に再度 apply する 
             - [ ] 問題なさそうならマージ
-            - [ ] branch を削除
+          branch: reset-develop
+          delete-branch: true
+          base: develop
